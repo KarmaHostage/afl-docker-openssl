@@ -22,10 +22,10 @@ fi
 
 if [ "$(ls -A $SYNCDIR)" ]; then
      echo "$SYNCDIR is not empty, going to resume"
-     exec afl-fuzz -m 200 -i - -o /fuzzing/syncdir -M openssl-master-fuzzer openssl asn1parse -in @@
+     exec afl-fuzz -m 200 -i - -o /fuzzing/syncdir -M openssl-master-fuzzer openssl x509 -text -in @@
 else
     echo "$SYNCDIR is empty, going to start new"
-    exec  afl-fuzz -m 200 -i /fuzzing/inputs -o /fuzzing/syncdir -M openssl-master-fuzzer openssl asn1parse -in @@
+    exec  afl-fuzz -m 200 -i /fuzzing/inputs -o /fuzzing/syncdir -M openssl-master-fuzzer openssl x509 -text -in @@
 fi
 
 tail -f /dev/null
